@@ -3,7 +3,7 @@ from json import loads, JSONDecodeError
 from .models.request import RequestParameters
 from .net.http import ApiRequester
 from .models.response import WhoisRecord, ErrorMessage
-from .exceptions.error import *
+from .exceptions.error import ResponseError, UnparsableApiResponse
 
 
 class Client:
@@ -75,10 +75,10 @@ class Client:
                 raise ResponseError(response, error)
             if 'WhoisRecord' in parsed:
                 return WhoisRecord(parsed['WhoisRecord'])
-            raise UnparableApiResponse(
+            raise UnparsableApiResponse(
                 "Could not find a correct root element.", None)
         except JSONDecodeError as error:
-            raise UnparableApiResponse("Could not parse API response", error)
+            raise UnparsableApiResponse("Could not parse API response", error)
 
     def raw_data(self, domain: str,
                  params: RequestParameters or None = None) -> str:

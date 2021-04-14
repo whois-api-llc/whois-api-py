@@ -42,7 +42,8 @@ def _datetime_value(values: dict, key: str) -> datetime.datetime or None:
         try:
             if m is not None:
                 return datetime.datetime.strptime(
-                    re_timezone_offset.sub(r'\1\2\4', dt), "%Y-%m-%dT%H:%M:%S%z")
+                    re_timezone_offset.sub(r'\1\2\4', dt),
+                    "%Y-%m-%dT%H:%M:%S%z")
             if m2 is not None:
                 return datetime.datetime.strptime(
                     re_milliseconds_and_timezone_name.sub(r' \2', dt),
@@ -51,7 +52,7 @@ def _datetime_value(values: dict, key: str) -> datetime.datetime or None:
                 return datetime.datetime.strptime(dt, '%Y-%m-%dT%H:%M:%SZ')
         except (ValueError, Exception) as error:
             _logger.error(
-                "Couldn't parse the date ({}). Following error occurred: {}".format(
+                "Couldn't parse the date ({}). Error occurred: {}".format(
                     dt,
                     error.__str__()
                 )
@@ -321,7 +322,7 @@ class RegistryData(BaseWhoisRecord):
         if values is not None:
             self.referral_url = _string_value(values, 'referralURL')
             self.status = _string_value(values, 'status')
-    
+
 
 class WhoisRecord(BaseWhoisRecord):
     registry_data: RegistryData or None

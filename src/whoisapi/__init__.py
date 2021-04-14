@@ -7,4 +7,5 @@ from .client import Client
 from .models.request import RequestParameters
 from .models.response import WhoisRecord, Registrant, RegistryData, Contact, \
     NameServers, ErrorMessage, Audit
-from .exceptions.error import *
+from .exceptions.error import WhoisApiError, ParameterError, \
+    EmptyApiKeyError, ResponseError, ApiAuthError, HttpApiError

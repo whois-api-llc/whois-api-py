@@ -1,6 +1,6 @@
 __all__ = ['ParameterError', 'HttpApiError', 'WhoisApiError',
            'ApiAuthError', 'ResponseError', 'EmptyApiKeyError',
-           'UnparableApiResponse']
+           'UnparsableApiResponse']
 
 from .error import ParameterError, HttpApiError, WhoisApiError, \
-    ApiAuthError, ResponseError, EmptyApiKeyError, UnparableApiResponse
+    ApiAuthError, ResponseError, EmptyApiKeyError, UnparsableApiResponse

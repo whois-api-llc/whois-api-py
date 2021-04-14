@@ -1,7 +1,6 @@
 from .base import BaseModel
 from ..exceptions.error import ParameterError, EmptyApiKeyError
 import re
-import warnings
 
 
 class RequestParameters(BaseModel):
@@ -51,6 +50,7 @@ class RequestParameters(BaseModel):
         self._check_proxy_data = 0
         self._thin_whois = 0
         self._ignore_raw_texts = 0
+
         super().__init__()
 
         if 'api_key' in kwargs:

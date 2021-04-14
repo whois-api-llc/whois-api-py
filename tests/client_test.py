@@ -15,9 +15,9 @@ class TestClient(unittest.TestCase):
     def test_get_correct_data(self):
         client = Client(api_key=os.getenv("API_KEY"))
 
+        date = '2009-03-19 21:47:17'
         whois = client.data('whoisxmlapi.com')
-        assert whois.created_date.strftime("%Y-%m-%d %H:%M:%S") \
-               == '2009-03-19 21:47:17'
+        assert whois.created_date.strftime("%Y-%m-%d %H:%M:%S") == date
 
     def test_get_raw(self):
         client = Client(api_key=os.getenv('API_KEY'))
