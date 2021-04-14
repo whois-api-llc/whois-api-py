@@ -1,0 +1,7 @@
+*/**/*.pyc
+Dockerfile
+*/**/*.egg-info
+*/**/__pycache__
+.idea
+.tox
+venv
