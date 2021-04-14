@@ -1,3 +1,15 @@
+.. image:: https://img.shields.io/badge/License-MIT-green.svg
+    :alt: whois-api-py license
+    :target: https://opensource.org/licenses/MIT
+
+.. image:: https://img.shields.io/pypi/v/whois-api.svg
+    :alt: whois-api-py release
+    :target: https://pypi.org/project/whois-api
+
+.. image:: https://github.com/whois-api-llc/whois-api-py/workflows/Build/badge.svg
+    :alt: whois-api-py build
+    :target: https://github.com/whois-api-llc/whois-api-py/actions
+
 ========
 Overview
 ========
