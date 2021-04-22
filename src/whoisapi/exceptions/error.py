@@ -37,7 +37,7 @@ class ResponseError(WhoisApiError):
         self._parsed_message = pm
 
 
-class UnparsableApiResponse(WhoisApiError):
+class UnparsableApiResponseError(WhoisApiError):
     def __init__(self, message, origin_error):
         self.message = message
         self.original_error = origin_error

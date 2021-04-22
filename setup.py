@@ -22,7 +22,7 @@ def read(*names, **kwargs):
 
 setup(
     name='whois-api',
-    version='1.0.0',
+    version='1.1.0',
     python_requires='~=3.6',
     license='MIT',
     description='Python client library for Whois API.',

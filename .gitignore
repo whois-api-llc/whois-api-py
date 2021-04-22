@@ -5,3 +5,7 @@ Dockerfile
 .idea
 .tox
 venv
+dist
+build
+run-tests.sh
+.env
