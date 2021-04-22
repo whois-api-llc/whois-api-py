@@ -18,7 +18,6 @@ class RequestParameters(BaseModel):
     - ignore_raw_texts
 
     Usage: instance.output_format = 'json'
-        or instance['output_format'] = 'json'
     """
 
     _re_api_key = re.compile(r'^at_[a-z0-9]{29}$', re.IGNORECASE)

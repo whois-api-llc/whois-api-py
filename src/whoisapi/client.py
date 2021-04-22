@@ -3,7 +3,7 @@ from json import loads, JSONDecodeError
 from .models.request import RequestParameters
 from .net.http import ApiRequester
 from .models.response import WhoisRecord, ErrorMessage
-from .exceptions.error import ResponseError, UnparsableApiResponse
+from .exceptions.error import ResponseError, UnparsableApiResponseError
 
 
 class Client:
@@ -59,7 +59,7 @@ class Client:
         :raises
         - base class is whoisapi.exceptions.WhoisApiError
           - ResponseError -- the response contain ErrorMessage
-          - UnparsableApiResponse -- the response couldn't be parsed
+          - UnparsableApiResponseError -- the response couldn't be parsed
           - ApiAuthError -- Server returns 401 HTTP code
           - HttpApiError -- HTTP code is not 2xx or 401
         - ConnectionError
@@ -75,10 +75,10 @@ class Client:
                 raise ResponseError(response, error)
             if 'WhoisRecord' in parsed:
                 return WhoisRecord(parsed['WhoisRecord'])
-            raise UnparsableApiResponse(
+            raise UnparsableApiResponseError(
                 "Could not find a correct root element.", None)
         except JSONDecodeError as error:
-            raise UnparsableApiResponse("Could not parse API response", error)
+            raise UnparsableApiResponseError("Could not parse API response", error)
 
     def raw_data(self, domain: str,
                  params: RequestParameters or None = None) -> str:
