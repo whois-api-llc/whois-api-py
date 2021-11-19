@@ -21,7 +21,16 @@ def _string_value(values: dict, key: str) -> str:
 
 def _int_value(values: dict, key: str) -> int:
     if key in values:
-        return int(values[key])
+        try:
+            return int(values[key])
+        except (ValueError, Exception) as error:
+            _logger.error(
+            "Couldn't parse the int ({}: {}). Error occurred: {}".format(
+                key,
+                values[key],
+                error.__str__()
+            )
+        )
     return 0
 
 
