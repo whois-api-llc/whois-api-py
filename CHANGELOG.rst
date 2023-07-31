@@ -2,6 +2,12 @@
 Changelog
 =========
 
+1.1.4 (2023-07-31)
+------------------
+
+* Fix datetime parsing
+* Add postal_code_str field
+
 1.1.3 (2023-07-31)
 ------------------
 

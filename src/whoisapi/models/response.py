@@ -4,9 +4,9 @@ import re
 import logging
 from .base import BaseModel
 
-
 _logger = logging.getLogger('whois-api-client-models')
 
+re_milliseconds_and_timezone_offset = re.compile(r'(\.\d\d\d)?([-+])(\d\d)(:)?(\d\d)$')
 re_timezone_offset = re.compile(r'([-+])(\d\d)(:)?(\d\d)$')
 re_coordinated_utc = re.compile(r'(T\d\d:\d\d:\d\dZ)$')
 re_milliseconds_and_timezone_name = re.compile(
@@ -25,12 +25,12 @@ def _int_value(values: dict, key: str) -> int:
             return int(values[key])
         except (ValueError, Exception) as error:
             _logger.error(
-            "Couldn't parse the int ({}: {}). Error occurred: {}".format(
-                key,
-                values[key],
-                error.__str__()
+                "Couldn't parse the int ({}: {}). Error occurred: {}".format(
+                    key,
+                    values[key],
+                    error.__str__()
+                )
             )
-        )
     return 0
 
 
@@ -45,19 +45,24 @@ def _datetime_value(values: dict, key: str) -> datetime.datetime or None:
         if values[key] is None:
             return None
         dt = str(values[key])
-        m = re_timezone_offset.search(dt)
-        m2 = re_milliseconds_and_timezone_name.search(dt)
-        m3 = re_coordinated_utc.search(dt)
+        m = re_milliseconds_and_timezone_offset.search(dt)
+        m2 = re_timezone_offset.search(dt)
+        m3 = re_milliseconds_and_timezone_name.search(dt)
+        m4 = re_coordinated_utc.search(dt)
         try:
             if m is not None:
                 return datetime.datetime.strptime(
-                    re_timezone_offset.sub(r'\1\2\4', dt),
+                    re_milliseconds_and_timezone_offset.sub(r'\1\2\3\5'),
                     "%Y-%m-%dT%H:%M:%S%z")
             if m2 is not None:
                 return datetime.datetime.strptime(
+                    re_timezone_offset.sub(r'\1\2\4', dt),
+                    "%Y-%m-%dT%H:%M:%S%z")
+            if m3 is not None:
+                return datetime.datetime.strptime(
                     re_milliseconds_and_timezone_name.sub(r' \2', dt),
                     "%Y-%m-%d %H:%M:%S %Z")
-            if m3 is not None:
+            if m4 is not None:
                 return datetime.datetime.strptime(dt, '%Y-%m-%dT%H:%M:%SZ')
         except (ValueError, Exception) as error:
             _logger.error(
@@ -122,6 +127,7 @@ class Contact(BaseModel):
     city: str
     state: str
     postal_code: int
+    postal_code_str: str
     country: str
     country_code: str
     email: str
@@ -142,6 +148,7 @@ class Contact(BaseModel):
         self.city = ''
         self.state = ''
         self.postal_code = 0
+        self.postal_code_str = ''
         self.country = ''
         self.country_code = ''
         self.email = ''
@@ -160,6 +167,7 @@ class Contact(BaseModel):
             self.city = _string_value(values, 'city')
             self.state = _string_value(values, 'state')
             self.postal_code = _int_value(values, 'postalCode')
+            self.postal_code_str = _string_value(values, 'postalCode')
             self.country = _string_value(values, 'country')
             self.country_code = _string_value(values, 'countryCode')
             self.email = _string_value(values, 'email')
