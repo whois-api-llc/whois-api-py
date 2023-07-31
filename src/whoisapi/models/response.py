@@ -52,7 +52,7 @@ def _datetime_value(values: dict, key: str) -> datetime.datetime or None:
         try:
             if m is not None:
                 return datetime.datetime.strptime(
-                    re_milliseconds_and_timezone_offset.sub(r'\1\2\3\5'),
+                    re_milliseconds_and_timezone_offset.sub(r'\2\3\5', dt),
                     "%Y-%m-%dT%H:%M:%S%z")
             if m2 is not None:
                 return datetime.datetime.strptime(
