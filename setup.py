@@ -22,8 +22,8 @@ def read(*names, **kwargs):
 
 setup(
     name='whois-api',
-    version='1.1.2',
-    python_requires='~=3.6',
+    version='1.1.3',
+    python_requires='~=3.7',
     license='MIT',
     description='Python client library for Whois API.',
     long_description='%s\n%s' % (
@@ -48,10 +48,11 @@ setup(
         'Operating System :: Microsoft :: Windows',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
         'Topic :: Utilities',
     ],
     keywords=[
